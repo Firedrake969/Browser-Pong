@@ -1,8 +1,8 @@
-/***********************************************************************
+ /***********************************************************************
 
 BROWSER PONG
 ===========================
-Most JavaScript by Firedrake969.  Some by turkey3.  Most CSS by turkey3, and some by Firedrake969.  Originally part of -FlamingGobble-, but now the code is turning into my own game  Turkey3 made the AI motion.
+Most JavaScript by Firedrake969.  Some by turkey3.  Most CSS by turkey3, and some by Firedrake969.  Originally part of -FlamingGobble-, but now the code is turning into my own game.  Turkey3 made the AI motion.
 ***********************************************************************/
 var ballDir = (Math.floor(Math.random() * (360) + 1)) * (Math.PI / 180);
 var player = $('#player');
@@ -12,7 +12,7 @@ var starting = true;
 var dist = 2;
 var playerSpeed = 10;
 var scorePlayer = 0;
-var ScoreOpponent = 0;
+var scoreOpponent = 0;
 var cpuSpeed = 0;
 var randOffset = 15;
 $(document).keydown(function (e) {
@@ -56,7 +56,7 @@ $(document).mouseenter(function () {
                             if (ball.position().top - cpu.position().top < 120) {
                                 cpuSpeed = 2;
                             } else {
-                                cpuSpeed = 2 - (Math.Random() / 2); //from 1.5-2
+                                cpuSpeed = 2 - (Math.random() / 2); //from 1.5-2
                             }
                         } else {
                             if (ball.position().top - cpu.position().top > 250) {
@@ -72,7 +72,7 @@ $(document).mouseenter(function () {
                             if (ball.position().top - cpu.position().top < 120) {
                                 cpuSpeed = -2;
                             } else {
-                                cpuSpeed = -2 + (Math.Random() / 2);
+                                cpuSpeed = -2 + (Math.random() / 2);
                             }
                         } else {
                             if (ball.position().top - cpu.position().top > 250) {
@@ -102,10 +102,12 @@ $(document).mouseenter(function () {
                 function detectGoal() {
                     if (ball.position().top < 15) {
                         scorePlayer += 1;
+                        $("#playerScore").text(scorePlayer);
                         reset();
                     }
                     if (ball.position().top > 375) {
                         scoreOpponent += 1;
+                        $("#cpuScore").text(scoreOpponent);
                         reset();
                     }
                 }
