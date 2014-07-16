@@ -99,7 +99,7 @@ function ballMove() {
 
 function paddleBounce(condition) {
     if (condition) {
-        ballDir = (180 - (ballDir * (180 / Math.PI))) * (Math.PI / 180);
+        ballDir = (Math.abs(180 - (ballDir * (180 / Math.PI)))) * (Math.PI / 180);
     }
 }
 
