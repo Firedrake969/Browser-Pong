@@ -10,11 +10,12 @@ var cpu = $("#cpu");
 var ball = $("#ball");
 var starting = true;
 var dist = 2;
-var playerSpeed = 10;
+var playerSpeed = 3;
 var scorePlayer = 0;
 var scoreOpponent = 0;
 var cpuSpeed = 0;
 var randOffset = 15;
+var key = 0;
 
 function ballBounce(condition) {
     if (condition) {
@@ -97,12 +98,24 @@ function ballMove() {
     ball.css("left", Math.round(ball.position().left + (dist * Math.cos(ballDir))) + 'px');
 }
 
+/*
 function paddleBounce(condition) {
     if (condition) {
         ballDir = (Math.abs(180 - (ballDir * (180 / Math.PI)))) * (Math.PI / 180);
     }
 }
+*/
 
+function paddleBounce() {
+    if (ball.position().left < player.position().left + 70 && ball.position().left + 10 > player.position().left && ball.position().top > 350) {
+        ballDir = (Math.abs(180 - (ballDir * (180 / Math.PI)))) * (Math.PI / 180);
+    }
+    if (ball.position().left < cpu.position().left + 70 && ball.position().left + 10 > cpu.position().left && ball.position().top < 30) {
+        ballDir = ((180 + (ballDir * (180 / Math.PI)))) * (Math.PI/180);
+    }
+}
+
+/*
 $(document).keydown(function (e) {
     if (e.keyCode === 68 && player.position().left < 430) {
         player.css("left", player.position().left + playerSpeed + 'px');
@@ -110,20 +123,38 @@ $(document).keydown(function (e) {
         player.css("left", player.position().left - playerSpeed + 'px');
     }
 });
+*/
+
+$(document).keydown(function (e) {
+    if (e.keyCode === 68) {
+        key = 1;
+    } else if (e.keyCode === 65) {
+        key = 2;
+    }
+});
+
+$(document).keyup(function() {
+    key = 0;
+});
 
 $(document).mouseenter(function () {
     $("#ball").click(function () {
         if (starting) {
             setInterval(function () {
                 ballMove();
-                //Ball bouncing!  Will be combined later.
                 //Check for walls
                 ballBounce(ball.position().left < 0 || ball.position().left > 500);
-                //Check for the player paddle
-                paddleBounce(ball.position().left < player.position().left + 70 && ball.position().left + 10 > player.position().left && ball.position().top > 350);
+                //Bounce off paddles
+                paddleBounce();
                 //AI MOTION
                 aiMove();
                 detectGoal();
+                //Player smooth movement
+                if (key == 1 && player.position().left < 430) {
+                    player.css("left", player.position().left + playerSpeed + 'px');
+                } else if (key == 2 && player.position().left > 10) {
+                    player.css("left", player.position().left - playerSpeed + 'px');
+                }
             }, 5);
         }
         starting = false;
