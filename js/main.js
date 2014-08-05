@@ -98,14 +98,6 @@ function ballMove() {
     ball.css("left", Math.round(ball.position().left + (dist * Math.cos(ballDir))) + 'px');
 }
 
-/*
-function paddleBounce(condition) {
-    if (condition) {
-        ballDir = (Math.abs(180 - (ballDir * (180 / Math.PI)))) * (Math.PI / 180);
-    }
-}
-*/
-
 function paddleBounce() {
     if (ball.position().left < player.position().left + 70 && ball.position().left + 10 > player.position().left && ball.position().top > 350) {
         ballDir = (Math.abs(180 - (ballDir * (180 / Math.PI)))) * (Math.PI / 180);
@@ -114,16 +106,6 @@ function paddleBounce() {
         ballDir = ((180 + (ballDir * (180 / Math.PI)))) * (Math.PI/180);
     }
 }
-
-/*
-$(document).keydown(function (e) {
-    if (e.keyCode === 68 && player.position().left < 430) {
-        player.css("left", player.position().left + playerSpeed + 'px');
-    } else if (e.keyCode === 65 && player.position().left > 10) {
-        player.css("left", player.position().left - playerSpeed + 'px');
-    }
-});
-*/
 
 $(document).keydown(function (e) {
     if (e.keyCode === 68) {
