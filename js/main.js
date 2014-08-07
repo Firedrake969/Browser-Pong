@@ -23,20 +23,20 @@ $(document).mouseenter(function () {
             setInterval(function () {
                 ballMove();
                 //Check for walls
-                ballBounce(ball.position().left < 0 || ball.position().left > 500);
+                ballBounce($('#ball').position().left < 0 || $('#ball').position().left > 500);
                 //Bounce off paddles
                 paddleBounce();
                 //AI MOTION
                 aiMove();
                 detectGoal();
                 //Player smooth movement
-                if (key == 1 && player.position().left < 430) {
-                    player.css("left", player.position().left + playerSpeed + 'px');
-                } else if (key == 2 && player.position().left > 10) {
-                    player.css("left", player.position().left - playerSpeed + 'px');
+                if (key == 1 && $('#player').position().left < 430) {
+                    $('#player').css("left", $('#player').position().left + playerSpeed + 'px');
+                } else if (key == 2 && $('#player').position().left > 10) {
+                    $('#player').css("left", $('#player').position().left - playerSpeed + 'px');
                 }
             }, 5);
         }
         starting = false;
     });
-});
+}); 
